@@ -2,12 +2,12 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-import test from '@/assets/test.png'
+import banner from '@/assets/filmScope.jpg'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" :src="test" width="125" height="125" />
+    <img alt="Vue logo" class="logo" :src="banner" width="400" />
 
     <div class="wrapper">
       <HelloWorld msg="FilmScope, le site d'entrainement à vue.js" />
