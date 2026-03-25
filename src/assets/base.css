@@ -1,0 +1,50 @@
+/* Palette gothique sombre */
+:root {
+  --color-background: #0b0b0f;
+  --color-background-soft: #121218;
+  --color-background-mute: #1a1a22;
+
+  --color-border: #2a2a35;
+  --color-border-hover: #3a3a4a;
+
+  --color-heading: #e6e6eb;
+  --color-text: #b8b8c2;
+
+  --color-accent: #6b2cff;
+  --color-accent-soft: #3b1a80;
+
+  --section-gap: 120px;
+}
+
+/* Reset propre */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+/* Body principal */
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: radial-gradient(circle at top, #121218, #050507);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+
+  line-height: 1.6;
+
+  font-family:
+    'Cinzel',
+    'Cormorant Garamond',
+    serif;
+
+  font-size: 15px;
+  letter-spacing: 0.5px;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
