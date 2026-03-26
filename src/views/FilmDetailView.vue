@@ -34,7 +34,6 @@ onMounted(() => {
 
 <template>
   <main class="film-detail">
-
     <!-- État de chargement -->
     <div v-if="isLoading" class="loading-gothic">
       <Spinner text="Chargement en cours..." />

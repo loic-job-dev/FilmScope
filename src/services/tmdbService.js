@@ -9,18 +9,14 @@ const api = axios.create({
 })
 
 export async function getPopularFilms(page) {
-  const { data } = await withMinDelay(
-    api.get('/movie/popular', { params: { page } })
-    )
+  const { data } = await withMinDelay(api.get('/movie/popular', { params: { page } }))
   return data.results // tableau de films
 }
 
 export async function searchFilms(query) {
   if (!query.trim()) return []
 
-  const { data } = await withMinDelay(
-    api.get('/search/movie', { params: { query } })
-  )
+  const { data } = await withMinDelay(api.get('/search/movie', { params: { query } }))
   return data.results
 }
 
@@ -37,7 +33,7 @@ export function getPosterUrl(posterPath, size = 'w500') {
 
 // Fonctions pour "forcer" le timer et voir le spinner
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 export async function withMinDelay(promise, minDelay = 1500) {
