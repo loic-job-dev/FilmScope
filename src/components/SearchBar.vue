@@ -16,7 +16,7 @@ defineEmits(['update:modelValue'])
   <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"
     placeholder="Rechercher un film..." type="search" />
 
-  <Button text="Rest" @click="$emit('update:modelValue', '')" />
+  <Button text="Rest" @click="$emit('update:modelValue', '')" :disabled="modelValue === ''" />
 </template>
 
 <style scoped>

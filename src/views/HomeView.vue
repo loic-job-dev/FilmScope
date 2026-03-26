@@ -52,10 +52,10 @@ async function loadFilms(page) {
   }
 }
 
-// watch : réagit aux changements de searchQuery
+// watch : réagit aux changements de search
 let timeout = null
 
-watch(search, (newQuery) => {
+watch(search, (newQuery) => {  // search est un ref, donc chaque changement déclenche le watch
   clearTimeout(timeout)
 
   timeout = setTimeout(async () => {
@@ -70,18 +70,12 @@ watch(search, (newQuery) => {
     } finally {
       isLoading.value = false
     }
-  }, 400) // 400ms
+  }, 800) // 800ms
 })
 
-// onMounted : chargement initial au montage du composant
-onMounted(() => {
-  // route.params.id contient la valeur du :id dans l'URL
-  const page = Number(route.params.page)
-  loadFilms(page)
-})
 
 watch(
-  () => route.params.page,
+  () => route.params.page,  // route.params.page n'est pas un ref, juste une valeur, donc le watch doit regarder une fonction (getter réactif)
   (newPage) => {
     loadFilms(Number(newPage) || 1)
   },
