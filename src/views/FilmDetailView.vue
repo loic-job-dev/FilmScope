@@ -34,6 +34,12 @@ onMounted(() => {
 
 <template>
   <main class="film-detail">
+
+    <!-- État de chargement -->
+    <div v-if="isLoading" class="loading-gothic">
+      <Spinner text="Chargement en cours..." />
+    </div>
+
     <div v-if="!film">
       <h2>Film introuvable...</h2>
     </div>
@@ -98,6 +104,18 @@ onMounted(() => {
   color: var(--color-text);
   opacity: 0.7;
   font-weight: 400;
+}
+
+/* Container */
+.loading-gothic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  font-family: 'Cinzel', serif;
+  color: #ff4d4d;
+  text-shadow: 0 0 6px rgba(192, 57, 43, 0.8);
 }
 
 /* Responsive */
