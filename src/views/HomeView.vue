@@ -23,6 +23,22 @@ const displayedFilms = computed(() =>
   search.value ? searchResults.value : popularFilms.value
 )
 
+// Variable dynamique pour le numéro de page
+const currentPage = computed(() =>
+  Number(route.params.page || 1)
+)
+
+
+//Fonction pour le changement de page
+function goToPage(page) {
+  if (page < 1) page = 1
+
+  router.push({
+    name: 'home',
+    params: { page }
+  })
+}
+
 async function loadFilms(page) {
   isLoading.value = true
   error.value = null
@@ -63,11 +79,24 @@ onMounted(() => {
   const page = Number(route.params.page)
   loadFilms(page)
 })
+
+watch(
+  () => route.params.page,
+  (newPage) => {
+    loadFilms(Number(newPage) || 1)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
   <main>
     <SearchBar v-model="search" />
+
+    <div class="nav_buttons">
+      <Button text="Précédent" @click="goToPage(currentPage - 1)" :disabled="currentPage === 1" />
+      <Button text="Suivant" @click="goToPage(currentPage + 1)" />
+    </div>
 
     <!-- État de chargement -->
     <div v-if="isLoading" class="loading">Chargement...</div>
@@ -92,6 +121,10 @@ onMounted(() => {
       </div>
     </div>
 
+    <div class="nav_buttons">
+      <Button text="Précédent" @click="goToPage(currentPage - 1)" :disabled="currentPage === 1" />
+      <Button text="Suivant" @click="goToPage(currentPage + 1)" />
+    </div>
   </main>
 </template>
 
@@ -126,5 +159,19 @@ h2 {
 
 h3 {
   color: #888;
+}
+
+.nav_buttons {
+  margin: 2rem 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  padding: 0.8rem 1.5rem;
+  background-color: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
 }
 </style>

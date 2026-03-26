@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <button>
+    <button :disabled="$attrs.disabled">
         {{ text }}
     </button>
 </template>
@@ -29,5 +29,20 @@ button:hover {
     background-color: var(--color-accent-soft);
     transform: scale(1.05);
     box-shadow: 0 2px 8px rgba(107, 44, 255, 0.4);
+}
+
+button:disabled {
+    background-color: #2a2a35;
+    color: #777;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+    transform: none;
+}
+
+button:disabled:hover {
+    background-color: #2a2a35;
+    transform: none;
+    box-shadow: none;
 }
 </style>
