@@ -14,7 +14,7 @@ defineProps({
   placeHolder: {
     type: String,
     default: '',
-  }
+  },
 })
 
 defineEmits(['update:modelValue'])
@@ -26,12 +26,16 @@ defineEmits(['update:modelValue'])
       {{ label }}
     </label>
 
-    <input id="search-input" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"
-      :placeholder="placeHolder" type="search" />
+    <input
+      id="search-input"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+      :placeholder="placeHolder"
+      type="search"
+    />
   </div>
 
   <Button text="Reset" @click="$emit('update:modelValue', '')" :disabled="modelValue === ''" />
-
 </template>
 
 <style scoped>

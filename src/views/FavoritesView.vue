@@ -13,7 +13,7 @@ const filteredFavoriteFilms = computed(() => favoriteStore.getFilteredFavorites(
 
 <template>
   <main>
-    <SearchBar v-model="search" />
+    <SearchBar label="Recherche par titre" v-model="search" place-holder="Titre du film..." />
 
     <div v-if="search !== ''">
       <p>{{ filteredFavoriteFilms.length }} résultat(s)</p>
