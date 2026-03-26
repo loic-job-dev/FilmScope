@@ -9,13 +9,18 @@ const api = axios.create({
 })
 
 export async function getPopularFilms(page) {
-  const { data } = await api.get('/movie/popular', { params: { page } })
+  const { data } = await withMinDelay(
+    api.get('/movie/popular', { params: { page } })
+    )
   return data.results // tableau de films
 }
 
 export async function searchFilms(query) {
   if (!query.trim()) return []
-  const { data } = await api.get('/search/movie', { params: { query } })
+
+  const { data } = await withMinDelay(
+    api.get('/search/movie', { params: { query } })
+  )
   return data.results
 }
 
@@ -28,4 +33,22 @@ export async function getFilmDetail(id) {
 export function getPosterUrl(posterPath, size = 'w500') {
   if (!posterPath) return '/placeholder-poster.png'
   return `${import.meta.env.VITE_TMDB_IMAGE_URL.replace('w500', size)}${posterPath}`
+}
+
+// Fonctions pour "forcer" le timer et voir le spinner
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export async function withMinDelay(promise, minDelay = 1500) {
+  const start = Date.now()
+
+  const result = await promise
+
+  const elapsed = Date.now() - start
+  if (elapsed < minDelay) {
+    await sleep(minDelay - elapsed)
+  }
+
+  return result
 }

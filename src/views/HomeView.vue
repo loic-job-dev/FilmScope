@@ -36,25 +36,13 @@ function goToPage(page) {
 async function loadFilms(page) {
   isLoading.value = true
   error.value = null
-  const startTime = Date.now() // timestamp au début
 
   try {
     popularFilms.value = await getPopularFilms(page)
   } catch (e) {
     error.value = e
   } finally {
-    // calcul du temps écoulé
-    const elapsed = Date.now() - startTime
-    const remaining = 1500 - elapsed // 1500ms = temps minimal
-
-    // on attend le temps restant si nécessaire
-    if (remaining > 0) {
-      setTimeout(() => {
-        isLoading.value = false
-      }, remaining)
-    } else {
-      isLoading.value = false
-    }
+    isLoading.value = false
   }
 }
 
@@ -77,7 +65,7 @@ watch(search, (newQuery) => {
     } finally {
       isLoading.value = false
     }
-  }, 800) // 800ms
+  }, 1000) // 1s
 })
 
 watch(
