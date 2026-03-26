@@ -39,5 +39,11 @@ export const useFavoriteStore = defineStore('favorites', () => {
         localStorage.setItem('filmscope-favorites', JSON.stringify(favorites.value))
     }
 
-    return { favorites, favoriteCount, isFavorite, addFavorite, removeFavorite, toggleFavorite, initStore }
+    function getFilteredFavorites(search) {
+        return favorites.value.filter(film =>
+            film.title.toLowerCase().includes(search.trim().toLowerCase())
+        )
+    }
+
+    return { favorites, favoriteCount, isFavorite, addFavorite, removeFavorite, toggleFavorite, initStore, getFilteredFavorites }
 })

@@ -95,7 +95,7 @@ watch(
 
     <div class="nav_buttons">
       <Button text="Précédent" @click="goToPage(currentPage - 1)" :disabled="currentPage === 1" />
-      <Button text="Suivant" @click="goToPage(currentPage + 1)" />
+      <Button text="Suivant" @click="goToPage(currentPage + 1)" :disabled="currentPage === 50" />
     </div>
 
     <!-- État de chargement -->
@@ -123,7 +123,7 @@ watch(
 
     <div class="nav_buttons">
       <Button text="Précédent" @click="goToPage(currentPage - 1)" :disabled="currentPage === 1" />
-      <Button text="Suivant" @click="goToPage(currentPage + 1)" />
+      <Button text="Suivant" @click="goToPage(currentPage + 1)" :disabled="currentPage === 50" />
     </div>
   </main>
 </template>

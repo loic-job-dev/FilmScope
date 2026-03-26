@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <button :disabled="$attrs.disabled">
+    <button v-bind="$attrs">
         {{ text }}
     </button>
 </template>

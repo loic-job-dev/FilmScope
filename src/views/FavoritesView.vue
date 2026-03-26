@@ -9,9 +9,7 @@ const search = ref('')
 const favoriteStore = useFavoriteStore()
 
 const filteredFavoriteFilms = computed(() =>
-    favoriteStore.favorites.filter(film =>
-        film.title.toLowerCase().includes(search.value.trim().toLowerCase())
-    )
+    favoriteStore.getFilteredFavorites(search.value)
 )
 </script>
 
