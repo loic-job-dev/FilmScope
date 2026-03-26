@@ -8,7 +8,7 @@ const api = axios.create({
     }
 })
 
-export async function getPopularFilms(page = 1) {
+export async function getPopularFilms(page) {
     const { data } = await api.get('/movie/popular', { params: { page } })
     return data.results  // tableau de films
 }

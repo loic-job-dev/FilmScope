@@ -2,7 +2,15 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import FilmList from '@/components/FilmList.vue'
 import SearchBar from '@/components/SearchBar.vue'
+import Button from '@/components/Button.vue'
 import { getPopularFilms, searchFilms } from '@/services/tmdbService'
+import { useRoute, useRouter } from 'vue-router'
+
+
+// useRoute() : accès aux infos de la route courante (params, query...)
+const route = useRoute()
+// useRouter() : navigation programmatique
+const router = useRouter()
 
 const search = ref('')
 const popularFilms = ref([])
@@ -15,11 +23,11 @@ const displayedFilms = computed(() =>
   search.value ? searchResults.value : popularFilms.value
 )
 
-async function loadFilms() {
+async function loadFilms(page) {
   isLoading.value = true
   error.value = null
   try {
-    popularFilms.value = await getPopularFilms()
+    popularFilms.value = await getPopularFilms(page)
   } catch (e) {
     error.value = e
   } finally {
@@ -51,7 +59,9 @@ watch(search, (newQuery) => {
 
 // onMounted : chargement initial au montage du composant
 onMounted(() => {
-  loadFilms()
+  // route.params.id contient la valeur du :id dans l'URL
+  const page = Number(route.params.page)
+  loadFilms(page)
 })
 </script>
 

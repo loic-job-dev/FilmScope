@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { getPosterUrl } from '@/services/tmdbService'
+import Button from './Button.vue';
 
 const router = useRouter()
 
@@ -26,9 +27,7 @@ const emit = defineEmits(['add-favorite'])
       ★ Favori
     </span>
 
-    <button @click.stop="emit('add-favorite', film)">
-      ⭐ Ajouter aux favoris
-    </button>
+    <Button text="Ajouter aux favoris" @click.stop="emit('add-favorite', film)" />
   </div>
 </template>
 
@@ -75,23 +74,6 @@ const emit = defineEmits(['add-favorite'])
 .left-content img:hover {
   filter: brightness(1) grayscale(0%);
   transform: scale(1.05);
-}
-
-.film-card button {
-  padding: 0.4rem 0.8rem;
-  background-color: var(--color-accent);
-  color: var(--color-background-soft);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.film-card button:hover {
-  background-color: var(--color-accent-soft);
-  transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(107, 44, 255, 0.4);
 }
 
 h4 {
