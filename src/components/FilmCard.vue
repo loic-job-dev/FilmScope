@@ -14,12 +14,16 @@ defineProps({
 })
 
 const emit = defineEmits(['add-favorite'])
+
+function getYear(release_date) {
+  return new Date(release_date).getFullYear()
+}
 </script>
 
 <template>
   <div class="film-card" @click="router.push({ name: 'film', params: { id: film.id } })">
     <div class="left-content">
-      <h4>{{ film.title }} ({{ film.year }})</h4>
+      <h4>{{ film.title }} ({{ getYear(film.release_date) }})</h4>
       <img :src="getPosterUrl(film.poster_path)" :alt="film.title" />
     </div>
 
