@@ -1,20 +1,24 @@
 <script setup>
 import { ref, computed } from 'vue'
-import Button from './Button.vue';
+import Button from './Button.vue'
 
 defineProps({
   modelValue: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 })
 
 defineEmits(['update:modelValue'])
 </script>
 
 <template>
-  <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"
-    placeholder="Rechercher un film..." type="search" />
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+    placeholder="Rechercher un film..."
+    type="search"
+  />
 
   <Button text="Rest" @click="$emit('update:modelValue', '')" :disabled="modelValue === ''" />
 </template>

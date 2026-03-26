@@ -11,9 +11,7 @@ const app = 'FilmScope'
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
-    <h3>
-      {{ app }}, la webApp au style gothique qui vous fait aimer le cinéma !
-    </h3>
+    <h3>{{ app }}, la webApp au style gothique qui vous fait aimer le cinéma !</h3>
     <nav class="navbar">
       <RouterLink to="/1">Menu principal</RouterLink>
       <RouterLink to="/favorites">Favoris</RouterLink>

@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getFilmDetail, getPosterUrl } from '@/services/tmdbService'
 
-
 // useRoute() : accès aux infos de la route courante (params, query...)
 const route = useRoute()
 // useRouter() : navigation programmatique
@@ -40,7 +39,7 @@ onMounted(() => {
     </div>
 
     <div v-else>
-      <img :src="getPosterUrl(film.poster_path)" :alt="film.title" class="poster">
+      <img :src="getPosterUrl(film.poster_path)" :alt="film.title" class="poster" />
 
       <div class="info">
         <h1>{{ film.title }}</h1>

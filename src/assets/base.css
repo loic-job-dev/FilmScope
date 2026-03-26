@@ -10,7 +10,7 @@
   --color-heading: #e6e6eb;
   --color-text: #b8b8c2;
 
-  --color-accent: #c0392b;       /* rouge foncé */
+  --color-accent: #c0392b; /* rouge foncé */
   --color-accent-soft: rgba(192, 57, 43, 0.2); /* rouge transparent */
 
   --section-gap: 120px;
@@ -36,10 +36,7 @@ body {
 
   line-height: 1.6;
 
-  font-family:
-    'Cinzel',
-    'Cormorant Garamond',
-    serif;
+  font-family: 'Cinzel', 'Cormorant Garamond', serif;
 
   font-size: 15px;
   letter-spacing: 0.5px;

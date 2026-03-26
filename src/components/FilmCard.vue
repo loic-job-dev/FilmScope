@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { getPosterUrl } from '@/services/tmdbService'
-import Button from './Button.vue';
+import Button from './Button.vue'
 
 const router = useRouter()
 
@@ -10,7 +10,7 @@ defineProps({
     type: Object,
     required: true,
   },
-  isFav: Boolean
+  isFav: Boolean,
 })
 
 const emit = defineEmits(['add-favorite'])
@@ -20,12 +20,10 @@ const emit = defineEmits(['add-favorite'])
   <div class="film-card" @click="router.push({ name: 'film', params: { id: film.id } })">
     <div class="left-content">
       <h4>{{ film.title }} ({{ film.year }})</h4>
-      <img :src="getPosterUrl(film.poster_path)" :alt="film.title">
+      <img :src="getPosterUrl(film.poster_path)" :alt="film.title" />
     </div>
 
-    <span v-if="isFav" class="favorite-badge">
-      ★ Favori
-    </span>
+    <span v-if="isFav" class="favorite-badge"> ★ Favori </span>
 
     <Button text="Ajouter aux favoris" @click.stop="emit('add-favorite', film)" />
   </div>

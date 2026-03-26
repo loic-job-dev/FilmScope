@@ -6,7 +6,6 @@ import Button from '@/components/Button.vue'
 import { getPopularFilms, searchFilms } from '@/services/tmdbService'
 import { useRoute, useRouter } from 'vue-router'
 
-
 // useRoute() : accès aux infos de la route courante (params, query...)
 const route = useRoute()
 // useRouter() : navigation programmatique
@@ -19,15 +18,10 @@ const isLoading = ref(false)
 const error = ref(null)
 
 // Afficher les résultats de recherche ou les films populaires
-const displayedFilms = computed(() =>
-  search.value ? searchResults.value : popularFilms.value
-)
+const displayedFilms = computed(() => (search.value ? searchResults.value : popularFilms.value))
 
 // Variable dynamique pour le numéro de page
-const currentPage = computed(() =>
-  Number(route.params.page || 1)
-)
-
+const currentPage = computed(() => Number(route.params.page || 1))
 
 //Fonction pour le changement de page
 function goToPage(page) {
@@ -35,7 +29,7 @@ function goToPage(page) {
 
   router.push({
     name: 'home',
-    params: { page }
+    params: { page },
   })
 }
 
@@ -55,7 +49,8 @@ async function loadFilms(page) {
 // watch : réagit aux changements de search
 let timeout = null
 
-watch(search, (newQuery) => {  // search est un ref, donc chaque changement déclenche le watch
+watch(search, (newQuery) => {
+  // search est un ref, donc chaque changement déclenche le watch
   clearTimeout(timeout)
 
   timeout = setTimeout(async () => {
@@ -73,13 +68,12 @@ watch(search, (newQuery) => {  // search est un ref, donc chaque changement déc
   }, 800) // 800ms
 })
 
-
 watch(
-  () => route.params.page,  // route.params.page n'est pas un ref, juste une valeur, donc le watch doit regarder une fonction (getter réactif)
+  () => route.params.page, // route.params.page n'est pas un ref, juste une valeur, donc le watch doit regarder une fonction (getter réactif)
   (newPage) => {
     loadFilms(Number(newPage) || 1)
   },
-  { immediate: true }
+  { immediate: true },
 )
 </script>
 

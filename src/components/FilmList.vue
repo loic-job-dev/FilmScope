@@ -10,7 +10,7 @@ defineProps({
   search: {
     type: String,
     required: false,
-  }
+  },
 })
 
 const favoriteStore = useFavoriteStore()
@@ -22,8 +22,13 @@ function handleToggle(film) {
 
 <template>
   <div class="film-list">
-    <FilmCard v-for="film in list" :key="film.id" :film="film" :is-fav="favoriteStore.isFavorite(film.id)"
-      @add-favorite="handleToggle" />
+    <FilmCard
+      v-for="film in list"
+      :key="film.id"
+      :film="film"
+      :is-fav="favoriteStore.isFavorite(film.id)"
+      @add-favorite="handleToggle"
+    />
   </div>
 </template>
 
