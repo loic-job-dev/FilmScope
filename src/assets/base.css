@@ -10,8 +10,8 @@
   --color-heading: #e6e6eb;
   --color-text: #b8b8c2;
 
-  --color-accent: #6b2cff;
-  --color-accent-soft: #3b1a80;
+  --color-accent: #c0392b;       /* rouge foncé */
+  --color-accent-soft: rgba(192, 57, 43, 0.2); /* rouge transparent */
 
   --section-gap: 120px;
 }

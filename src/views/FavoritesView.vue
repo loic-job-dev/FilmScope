@@ -52,7 +52,7 @@ input {
 
 input:focus {
     border-color: var(--color-accent);
-    box-shadow: 0 0 8px rgba(107, 44, 255, 0.3);
+    box-shadow: 0 0 8px rgba(192, 57, 43, 0.4);
 }
 
 h2 {

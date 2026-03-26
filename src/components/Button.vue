@@ -28,7 +28,7 @@ button {
 button:hover {
     background-color: var(--color-accent-soft);
     transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(107, 44, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.4);
 }
 
 button:disabled {

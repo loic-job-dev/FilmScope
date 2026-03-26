@@ -48,7 +48,7 @@ const emit = defineEmits(['add-favorite'])
 .film-card:hover {
   border-color: var(--color-accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(107, 44, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.4);
 }
 
 .left-content {
@@ -94,7 +94,7 @@ img {
   top: 10px;
   right: 10px;
 
-  background: rgba(107, 44, 255, 0.15);
+  background: rgba(192, 57, 43, 0.15);
   color: var(--color-accent);
 
   border: 1px solid var(--color-accent);
@@ -106,6 +106,6 @@ img {
   letter-spacing: 0.5px;
 
   backdrop-filter: blur(4px);
-  box-shadow: 0 0 8px rgba(107, 44, 255, 0.3);
+  box-shadow: 0 0 8px rgba(192, 57, 43, 0.3);
 }
 </style>

@@ -12,10 +12,10 @@ const app = 'FilmScope'
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-      Le site {{app}} est pas cassé !
+      {{ app }}, la webApp au style gothique qui vous fait aimer le cinéma !
     </h3>
     <nav class="navbar">
-      <RouterLink to="/">Menu principal</RouterLink>
+      <RouterLink to="/1">Menu principal</RouterLink>
       <RouterLink to="/favorites">Favoris</RouterLink>
     </nav>
   </div>
@@ -27,7 +27,8 @@ h1 {
   font-size: 2.8rem;
   letter-spacing: 1px;
   color: var(--color-heading);
-  text-shadow: 0 0 10px rgba(107, 44, 255, 0.2);
+  text-shadow: 0 0 10px rgba(192, 57, 43, 0.4);
+  /* glow rouge */
 }
 
 h3 {
@@ -40,6 +41,7 @@ h3 {
 .greetings h3 {
   text-align: center;
 }
+
 /* NAVBAR */
 .navbar {
   display: flex;
@@ -71,13 +73,15 @@ h3 {
 /* HOVER */
 .navbar a:hover {
   color: var(--color-accent);
-  background-color: rgba(107, 44, 255, 0.15);
+  background-color: rgba(192, 57, 43, 0.4);
+  /* rouge hover */
 }
 
 /* LIEN ACTIF */
 .navbar a.router-link-exact-active {
   color: var(--color-accent);
-  background-color: rgba(107, 44, 255, 0.25);
-  box-shadow: 0 0 8px rgba(107, 44, 255, 0.3);
+  background-color: rgba(192, 57, 43, 0.25);
+  box-shadow: 0 0 8px rgba(192, 57, 43, 0.4);
+  /* glow rouge */
 }
 </style>

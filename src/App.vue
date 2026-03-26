@@ -10,7 +10,7 @@ import banner from '@/assets/filmScope.jpg'
     <img alt="Vue logo" class="logo" :src="banner" width="400" />
 
     <div class="wrapper">
-      <HelloWorld msg="FilmScope, le site d'entrainement à vue.js" />
+      <HelloWorld msg="Bienvenue sur FilmScope" />
     </div>
   </header>
 
