@@ -36,13 +36,25 @@ function goToPage(page) {
 async function loadFilms(page) {
   isLoading.value = true
   error.value = null
+  const startTime = Date.now() // timestamp au début
+
   try {
     popularFilms.value = await getPopularFilms(page)
   } catch (e) {
     error.value = e
   } finally {
-    // finally s'exécute toujours, même en cas d'erreur
-    isLoading.value = false
+    // calcul du temps écoulé
+    const elapsed = Date.now() - startTime
+    const remaining = 1500 - elapsed // 1500ms = temps minimal
+
+    // on attend le temps restant si nécessaire
+    if (remaining > 0) {
+      setTimeout(() => {
+        isLoading.value = false
+      }, remaining)
+    } else {
+      isLoading.value = false
+    }
   }
 }
 
@@ -87,7 +99,12 @@ watch(
     </div>
 
     <!-- État de chargement -->
-    <div v-if="isLoading" class="loading">Chargement...</div>
+    <div v-if="isLoading" class="loading-gothic">
+      <div class="spinner-flame"></div>
+      <p class="loading-text">
+        Chargement en cours...
+      </p>
+    </div>
 
     <!-- État d'erreur -->
     <div v-else-if="error" class="error">
@@ -161,5 +178,89 @@ h3 {
   background-color: var(--color-background-soft);
   border: 1px solid var(--color-border);
   border-radius: 10px;
+}
+
+/* Container */
+.loading-gothic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  font-family: 'Cinzel', serif;
+  color: #ff4d4d;
+  text-shadow: 0 0 6px rgba(192, 57, 43, 0.8);
+}
+
+/* Texte */
+.loading-text {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+/* Spinner avec effet de “flammes” */
+.spinner-flame {
+  width: 70px;
+  height: 70px;
+  border: 6px solid rgba(192, 57, 43, 0.15);
+  border-top-color: #ff1a1a;
+  border-radius: 50%;
+  position: relative;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.7), 0 0 20px rgba(192, 57, 43, 0.3) inset;
+}
+
+/* Ajout de “flammes” pulsantes autour du spinner */
+.spinner-flame::before,
+.spinner-flame::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle, #ff1a1a, rgba(192, 57, 43, 0));
+  border-radius: 50%;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: flame 1s infinite alternate;
+}
+
+.spinner-flame::after {
+  top: auto;
+  bottom: -10px;
+  animation-delay: 0.5s;
+}
+
+/* Animations */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 8px rgba(255, 26, 26, 0.7), 0 0 16px rgba(192, 57, 43, 0.5);
+  }
+
+  100% {
+    text-shadow: 0 0 16px rgba(255, 26, 26, 1), 0 0 32px rgba(192, 57, 43, 0.8);
+  }
+}
+
+@keyframes flame {
+  0% {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1.2);
+    opacity: 1;
+  }
 }
 </style>
