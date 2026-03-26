@@ -3,31 +3,55 @@ import { ref, computed } from 'vue'
 import Button from './Button.vue'
 
 defineProps({
+  label: {
+    type: String,
+    required: true,
+  },
   modelValue: {
     type: String,
     default: '',
   },
+  placeHolder: {
+    type: String,
+    default: '',
+  }
 })
 
 defineEmits(['update:modelValue'])
 </script>
 
 <template>
-  <input
-    :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
-    placeholder="Rechercher un film..."
-    type="search"
-  />
+  <div class="search-container">
+    <label for="search-input" class="label">
+      {{ label }}
+    </label>
 
-  <Button text="Rest" @click="$emit('update:modelValue', '')" :disabled="modelValue === ''" />
+    <input id="search-input" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"
+      :placeholder="placeHolder" type="search" />
+  </div>
+
+  <Button text="Reset" @click="$emit('update:modelValue', '')" :disabled="modelValue === ''" />
+
 </template>
 
 <style scoped>
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  opacity: 0.7;
+  letter-spacing: 0.5px;
+}
+
 input {
   width: 100%;
   padding: 0.7rem;
-  margin-bottom: 1.5rem;
 
   background-color: var(--color-background-soft);
   border: 1px solid var(--color-border);

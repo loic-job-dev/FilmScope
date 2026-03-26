@@ -20,6 +20,13 @@ export async function searchFilms(query) {
   return data.results
 }
 
+export async function searchByYear(year) {
+    if (!year || isNaN(year)) return []
+
+    const { data } = await withMinDelay(api.get('/discover/movie', { params: { primary_release_year: year, sort_by: 'popularity.desc' } }))
+    return data.results
+}
+
 export async function getFilmDetail(id) {
   const { data } = await api.get(`/movie/${id}`)
   return data

@@ -3,7 +3,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import FilmList from '@/components/FilmList.vue'
 import SearchBar from '@/components/SearchBar.vue'
 import Button from '@/components/Button.vue'
-import { getPopularFilms, searchFilms } from '@/services/tmdbService'
+import { getPopularFilms, searchByYear, searchFilms } from '@/services/tmdbService'
 import { useRoute, useRouter } from 'vue-router'
 import Spinner from '@/components/Spinner.vue'
 
@@ -13,13 +13,18 @@ const route = useRoute()
 const router = useRouter()
 
 const search = ref('')
+const searchYear = ref('')
 const popularFilms = ref([])
 const searchResults = ref([])
 const isLoading = ref(false)
 const error = ref(null)
 
 // Afficher les résultats de recherche ou les films populaires
-const displayedFilms = computed(() => (search.value ? searchResults.value : popularFilms.value))
+const displayedFilms = computed(() => {
+  if (search.value) return searchResults.value
+  if (searchYear.value) return searchResults.value
+  return popularFilms.value
+})
 
 // Variable dynamique pour le numéro de page
 const currentPage = computed(() => Number(route.params.page || 1))
@@ -52,6 +57,7 @@ let timeout = null
 
 watch(search, (newQuery) => {
   // search est un ref, donc chaque changement déclenche le watch
+  searchYear.value = ''
   clearTimeout(timeout)
 
   timeout = setTimeout(async () => {
@@ -69,6 +75,26 @@ watch(search, (newQuery) => {
   }, 1000) // 1s
 })
 
+watch(searchYear, (newYear) => {
+  search.value = ''
+  // search est un ref, donc chaque changement déclenche le watch
+  clearTimeout(timeout)
+
+  timeout = setTimeout(async () => {
+    if (!newYear || isNaN(newYear)) {
+      searchResults.value = []
+      return
+    }
+
+    isLoading.value = true
+    try {
+      searchResults.value = await searchByYear(newYear)
+    } finally {
+      isLoading.value = false
+    }
+  }, 1000) // 1s
+})
+
 watch(
   () => route.params.page, // route.params.page n'est pas un ref, juste une valeur, donc le watch doit regarder une fonction (getter réactif)
   (newPage) => {
@@ -80,7 +106,8 @@ watch(
 
 <template>
   <main>
-    <SearchBar v-model="search" />
+    <SearchBar label="Recherche par titre" v-model="search" place-holder="Titre du film..." />
+    <SearchBar label="Recherche par année" v-model="searchYear" place-holder="Année du film..." />
 
     <div class="nav_buttons">
       <Button text="Précédent" @click="goToPage(currentPage - 1)" :disabled="currentPage === 1" />
